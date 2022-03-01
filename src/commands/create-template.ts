@@ -4,9 +4,9 @@ import createFile from '../create-file/create-file';
 import { setFileContent } from '../parser';
 
 export default async function createTemplate(){
-    const route = await vscode.window.showInputBox({ prompt:"Enter the name of the template" });
-    if(!route) return;
-    const path_subdirs = `${route}.yml`.split('/');
+    const file_path = await vscode.window.showInputBox({ prompt:"Enter the name of the template" });
+    if(!file_path) return;
+    const path_subdirs = `${file_path}.yml`.split('/');
     let current_path = 'template';
     const { content } = await setFileContent(`@template`,'');
     for (let index = 0; index < path_subdirs.length; index++) {

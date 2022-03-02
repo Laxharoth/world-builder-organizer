@@ -97,6 +97,7 @@ class FullTreePath{
     path_size:number=1;
     constructor(public path:KeyList){}
     get key(){ return this.path.slice(-this.path_size); }
+    get str_key(){ return this.path.slice(-this.path_size).join("."); }
 }
 export type TreeNode = { [key:KeyPiece]:TreeNode};
 export type KeyList = KeyPiece[];

@@ -2,8 +2,12 @@
  * A structure of a tree starting from the leaves, the keys are smallest route without collition.
  */
 export default class ReverseTree{
-    existing_keys:{[key: string]:FullTreePath} = {};
+    private existing_keys:{[key: string]:FullTreePath} = {};
+    private modified = true;
+    private memoized_keys:KeyList[] = [];
+    private memoized_paths:string[] = [];
     insert(node:KeyList):[inserted:FullTreePath|null,modified:ChangedPath|null]{
+        this.modified = true;
         let changed_path = null;
         const new_path = new FullTreePath(node);
         // get the key for new_path
@@ -46,6 +50,7 @@ export default class ReverseTree{
         return old_path;
     }
     remove(node:KeyList):[ removed: FullTreePath | null, modified: ChangedPath | null]{
+        this.modified = true;
         const old_path = this.find(node);
         if(!old_path) return[ null, null];
         //remove the old path
@@ -74,10 +79,18 @@ export default class ReverseTree{
             }];
     }
     get keys():KeyList[]{
-        return Object.entries(this.existing_keys).map(([_,path]) => path.key);
+        this.memoize()
+        return this.memoized_keys;
     }
     get paths():string[]{
-        return this.keys.map(key=>key.join('.'));
+        this.memoize()
+        return this.memoized_paths;
+    }
+    private memoize(){
+        if(!this.modified)return;
+        this.modified = false;
+        this.memoized_keys = Object.entries(this.existing_keys).map(([_,path]) => path.key);
+        this.memoized_paths=this.memoized_keys.map(key=>key.join('.'));
     }
 }
 class FullTreePath{

@@ -39,9 +39,9 @@ suite('ReverseTree', () => {
         const tree = new ReverseTree()
         for(const path of file_paths){
             tree.insert(path);
-            const [ new_path,old_path ] = tree.insert(path);
+            const [ new_path,oldPath ] = tree.insert(path);
             assert.strictEqual(new_path,null);
-            assert.strictEqual(old_path,null);
+            assert.strictEqual(oldPath,null);
         }
         const paths = tree.keys;
         for(const compare_path of paths){

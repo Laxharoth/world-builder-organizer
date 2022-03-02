@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import initWorldBuilder from './commands/initWorldBuilder';
 import createFromTemplate from './commands/create-from-template';
-import { content_cards } from './load-data/map-content';
+import { contentCards } from './load-data/map-content';
 import { monitorContentChange, monitorTemplateChange } from './load-data/monitorFileChange';
 import createTemplate from './commands/create-template';
 import copyTemplate from './commands/copy-template';
@@ -21,7 +21,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('world-build.create-template', createTemplate));
 	context.subscriptions.push(vscode.commands.registerCommand('world-build.copy-template', copyTemplate));
 	setTimeout(() => {
-		console.log(content_cards)
+		console.log(contentCards);
 	}, 1500);
 }
 

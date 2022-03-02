@@ -8,7 +8,7 @@ export default async function loadFiles(files:{ [key: string]: string}){
     (doc.contents = addYamlItentation(template) )&&(files.template = doc.toString());
 }
 function addYamlItentation(obj:{ [key:string]:string}){
-    const copy = {...obj}
+    const copy = {...obj};
     for (const [ key, value ] of Object.entries(copy)){
         copy[key] = `${value}\n`;
     }
@@ -24,19 +24,19 @@ export class CardFile{
         this.name = name;
         this.description = description;
     }
-    get split_path(){return this.path.split(/\/|\\/);}
-    get label(){return this.name};
+    get splitPath(){return this.path.split(/\/|\\/);}
+    get label(){return this.name;};
 }
 /** load a yaml file and parse it as a CardFile */
 export function readCardFile(uri: string):CardFile|null {
-    const yaml_string = fs.readFileSync(uri).toString();
-    const yaml = Yaml.parse(yaml_string) as CardFile;
+    const yamlString = fs.readFileSync(uri).toString();
+    const yaml = Yaml.parse(yamlString) as CardFile;
     if (isCardFile(yaml))
-        return new CardFile(uri, yaml);
+        {return new CardFile(uri, yaml);}
     return null;
 }
 enum FileNamesEnum{
     template='template'
 }
 export type FileName = `${FileNamesEnum}`;
-export type FileNames = { [key in FileNamesEnum]:string; }
+export type FileNames = { [key in FileNamesEnum]:string; };

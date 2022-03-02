@@ -13,14 +13,14 @@ function addMonitor(addCard:(card: CardFile)=>void, removeCard:(uri: string)=>vo
         watcher.onDidCreate((uri)=>{
             const card = readCardFile(uri.fsPath);
             card && addCard(card);
-        })
+        });
         watcher.onDidChange((uri)=>{
             const card = readCardFile(uri.fsPath);
             card && addCard(card);
-        })
+        });
         watcher.onDidDelete((uri)=>{
             removeCard(uri.fsPath);
-        })
+        });
     }
 }
 
@@ -34,10 +34,10 @@ export async function loadYamlFiles(addCard:(card:CardFile) => void,subdir:strin
     for(const wsPath of wsPaths||[]){
         const dirpath =  path.join(wsPath.uri.fsPath,subdir);
         let files;
-        try{ files = await fs.promises.readdir(dirpath) }
+        try{ files = await fs.promises.readdir(dirpath); }
         catch(error){ return; }
         for(const file of files){
-            const stats = await fs.promises.stat(path.join(dirpath,file))
+            const stats = await fs.promises.stat(path.join(dirpath,file));
             if(stats.isDirectory()){
                 loadYamlFiles(addCard,path.join(subdir,file));
                 continue;

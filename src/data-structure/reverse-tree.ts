@@ -2,108 +2,106 @@
  * A structure of a tree starting from the leaves, the keys are smallest route without collition.
  */
 export default class ReverseTree{
-    private existing_keys:{[key: string]:FullTreePath} = {};
+    private existingKeys:{[key: string]:FullTreePath} = {};
     private modified = true;
-    private memoized_keys:KeyList[] = [];
-    private memoized_paths:string[] = [];
+    private memoizedKeys:KeyList[] = [];
+    private memoizedPaths:string[] = [];
     insert(node:KeyList):[inserted:FullTreePath|null,modified:ChangedPath|null]{
         this.modified = true;
-        let changed_path = null;
-        const new_path = new FullTreePath(node);
-        // get the key for new_path
-        const form_key  = () => new_path.key.join(".");
+        let changedPath = null;
+        const newPath = new FullTreePath(node);
         // get minimal path
-        while(  !this.existing_keys[new_path.key.join(".")] &&
-                Object.keys(this.existing_keys).some(key => key.endsWith(new_path.key.join("."))) ){
-            new_path.path_size++;
+        while(  !this.existingKeys[newPath.key.join(".")] &&
+                Object.keys(this.existingKeys).some(key => key.endsWith(newPath.key.join("."))) ){
+            newPath.pathSize++;
         }
         // check if minimal path exists (solve keys collition)
-        if(this.existing_keys.hasOwnProperty(form_key())){
+        if(this.existingKeys.hasOwnProperty(newPath.strKey)){
             // get path and key for existing keys
-            const old_key = form_key();
-            const old_path = this.existing_keys[form_key()];
-            if(old_path.path.join(".") === new_path.path.join("."))return [null,null];
-            // grab additional key pieces until old_path and new path are different
+            const oldKey = newPath.strKey;
+            const oldPath = this.existingKeys[newPath.strKey];
+            if(oldPath.path.join(".") === newPath.path.join(".")){return [null,null];}
+            // grab additional key pieces until oldPath and new path are different
             do{
-                old_path.path_size++;
-                new_path.path_size++;
-            }while(old_path.key.join(".")===new_path.key.join("."));
-            //replace the old_key with the differentiation
-            delete this.existing_keys[old_key];
-            this.existing_keys[old_path.key.join(".")] = old_path;
-            changed_path = {
-                old_key,
-                new_key:old_path.key.join("."),
-                path:old_path
-            }
+                oldPath.pathSize++;
+                newPath.pathSize++;
+            }while(oldPath.key.join(".")===newPath.key.join("."));
+            //replace the oldKey with the differentiation
+            delete this.existingKeys[oldKey];
+            this.existingKeys[oldPath.key.join(".")] = oldPath;
+            changedPath = {
+                oldKey: oldKey,
+                newKey:oldPath.key.join("."),
+                path:oldPath
+            };
         }
         // add the new path
-        this.existing_keys[form_key()] = new_path;
+        this.existingKeys[newPath.strKey] = newPath;
         return [
-            this.existing_keys[form_key()],
-            changed_path
+            this.existingKeys[newPath.strKey],
+            changedPath
         ];
     }
     find(node:KeyList): FullTreePath | undefined{
-        const old_path = Object.values(this.existing_keys).find((path)=>path.path.join(".")===node.join(".")||path.key.join(".")===node.join("."));
-        if(!old_path) return;
-        return old_path;
+        const oldPath = Object.values(this.existingKeys).find((path)=>path.path.join(".")===node.join(".")||path.key.join(".")===node.join("."));
+        if(!oldPath) {return;}
+        return oldPath;
     }
     remove(node:KeyList):[ removed: FullTreePath | null, modified: ChangedPath | null]{
         this.modified = true;
-        const old_path = this.find(node);
-        if(!old_path) return[ null, null];
+        const oldPath = this.find(node);
+        if(!oldPath) {return[ null, null];}
         //remove the old path
-        delete this.existing_keys[old_path.key.join(".")];
+        delete this.existingKeys[oldPath.key.join(".")];
         // copy the old path to prevent modifying the old path
-        const copy_old_path = Object.create(old_path);
+        const copyOldPath = Object.create(oldPath);
         // reduce the path_size to find the collitioned_paths
-        copy_old_path.path_size--;
-        const collitioned_paths = Object.values(this.existing_keys).filter(path => path!==old_path && path.key.join(".").endsWith(copy_old_path.key.join(".")));
-        if(collitioned_paths.length > 1 || collitioned_paths.length === 0) return [old_path,null];
-        const collitioned_path = collitioned_paths[0];
-        const old_collitioned_key = collitioned_path.key.join(".")
-        delete this.existing_keys[old_collitioned_key];
+        copyOldPath.path_size--;
+        const collitionedPaths = Object.values(this.existingKeys).filter(path => path!==oldPath && path.key.join(".").endsWith(copyOldPath.key.join(".")));
+        if(collitionedPaths.length > 1 || collitionedPaths.length === 0) {return [oldPath,null];}
+        const collitionedPath = collitionedPaths[0];
+        const oldCollitionedKey = collitionedPath.key.join(".");
+        delete this.existingKeys[oldCollitionedKey];
         // reduce path_size until we find a collition
-        while(!Object.values(this.existing_keys).some(path => path.path.join(".").endsWith(collitioned_path.key.join("."))) && collitioned_path.path_size>=1)
-            collitioned_path.path_size--;
+        while(!Object.values(this.existingKeys).some(path => path.path.join(".").endsWith(collitionedPath.key.join("."))) && collitionedPath.pathSize>=1)
+            {collitionedPath.pathSize--;}
         // remove the collition
-        collitioned_path.path_size++;
-        this.existing_keys[collitioned_path.key.join(".")] = collitioned_path;
+        collitionedPath.pathSize++;
+        this.existingKeys[collitionedPath.key.join(".")] = collitionedPath;
         return [
-            old_path,
+            oldPath,
             {
-                old_key:old_collitioned_key,
-                new_key:collitioned_path.key.join("."),
-                path: collitioned_path
+                oldKey:oldCollitionedKey,
+                newKey:collitionedPath.key.join("."),
+                path: collitionedPath
             }];
     }
     get keys():KeyList[]{
-        this.memoize()
-        return this.memoized_keys;
+        this.memoize();
+        return this.memoizedKeys;
     }
     get paths():string[]{
-        this.memoize()
-        return this.memoized_paths;
+        this.memoize();
+        return this.memoizedPaths;
     }
     private memoize(){
-        if(!this.modified)return;
+        if(!this.modified){return;}
         this.modified = false;
-        this.memoized_keys = Object.entries(this.existing_keys).map(([_,path]) => path.key);
-        this.memoized_paths=this.memoized_keys.map(key=>key.join('.'));
+        this.memoizedKeys = Object.entries(this.existingKeys).map(([_,path]) => path.key);
+        this.memoizedPaths=this.memoizedKeys.map(key=>key.join('.'));
     }
 }
 class FullTreePath{
-    path_size:number=1;
+    pathSize:number=1;
     constructor(public path:KeyList){}
-    get key(){ return this.path.slice(-this.path_size); }
-    get str_key(){ return this.key.join("."); }
+    get key(){ return this.path.slice(-this.pathSize); }
+    get strKey(){ return this.key.join("."); }
 }
 export type TreeNode = { [key:KeyPiece]:TreeNode};
 export type KeyList = KeyPiece[];
 export type KeyPiece = number|string;
 export type ChangedPath = {
-    old_key:string;
-    new_key:string;
+    oldKey:string;
+    newKey:string;
     path:FullTreePath;
-}
+};

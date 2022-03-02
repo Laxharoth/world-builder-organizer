@@ -3,7 +3,7 @@
  */
 export default class ReverseTree{
     existing_keys:{[key: string]:FullTreePath} = {};
-    insert(node:KeyList):[inserted:FullTreePath|null,deleted:ChangedPath|null]{
+    insert(node:KeyList):[inserted:FullTreePath|null,modified:ChangedPath|null]{
         let changed_path = null;
         const new_path = new FullTreePath(node);
         // get the key for new_path
@@ -45,7 +45,7 @@ export default class ReverseTree{
         if(!old_path) return;
         return old_path;
     }
-    remove(node:KeyList):[ removed: FullTreePath | null, changed: ChangedPath | null]{
+    remove(node:KeyList):[ removed: FullTreePath | null, modified: ChangedPath | null]{
         const old_path = this.find(node);
         if(!old_path) return[ null, null];
         //remove the old path

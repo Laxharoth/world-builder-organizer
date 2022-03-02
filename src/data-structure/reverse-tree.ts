@@ -76,6 +76,9 @@ export default class ReverseTree{
     get keys():KeyList[]{
         return Object.entries(this.existing_keys).map(([_,path]) => path.key);
     }
+    get paths():string[]{
+        return this.keys.map(key=>key.join('.'));
+    }
 }
 class FullTreePath{
     path_size:number=1;

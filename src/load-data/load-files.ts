@@ -24,6 +24,7 @@ export class CardFile{
         this.name = name;
         this.description = description;
     }
+    get split_path(){return this.path.split(/\/|\\/);}
     get label(){return this.name};
 }
 /** load a yaml file and parse it as a CardFile */

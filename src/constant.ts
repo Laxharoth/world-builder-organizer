@@ -1,1 +1,1 @@
-export const KEY_PATH_SEPARATOR = '.';
+export const KEY_PATH_SEPARATOR = '_';

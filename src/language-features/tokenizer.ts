@@ -26,6 +26,7 @@ export default class Tokenizer{
     private buildToken(word: string, range: Range):ParsedToken|null {
         if (this.isLink(word)) {
             return {
+                token:word,
                 range,
                 tokenType: "link"
             };
@@ -38,6 +39,7 @@ export default class Tokenizer{
     }
 }
 interface ParsedToken{
+    token: string;
     range: Range;
 	tokenType: TokenType;
 }

@@ -11,7 +11,11 @@ export default class CardReferenceCompleter implements CompletionItemProvider<Co
         const items : CompletionItem[] = [];
         const lastWord = linePrefix.split(' ').slice(-1)[0];
         if(!lastWord || !lastWord.startsWith("@")){return null;}
-        items.push(...existingKeys().filter(key=>`@${key}`.startsWith(`${lastWord}`)).map(key=> new CompletionItem(key,vscode.CompletionItemKind.Reference)));
+        items.push(
+            ...existingKeys()
+                .filter(key=>`@${key}`.startsWith(`${lastWord}`))
+                .map(key=> new CompletionItem(key,vscode.CompletionItemKind.Reference))
+            );
         return items;
     }
 }

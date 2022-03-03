@@ -15,6 +15,7 @@ export const contentCards:CardCollection = {};
  * key is the path */
 const reverseContentCards:ReverseCardCollection = {};
 const reverseContentTree:ReverseTree = new ReverseTree();
+export function existingKeys(){return reverseContentTree.paths;}
 
 export function addTemplate(card:CardFile){
     const key = solveAddCardCollition(templateCards,reverseTemplateCards,reverseTemplateTree,card);

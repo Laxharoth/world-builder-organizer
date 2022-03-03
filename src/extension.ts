@@ -5,7 +5,7 @@ import { contentCards } from './load-data/map-content';
 import { monitorContentChange, monitorTemplateChange } from './load-data/monitorFileChange';
 import createTemplate from './commands/create-template';
 import copyTemplate from './commands/copy-template';
-import CardReferenceCompleater from './language-features/complete-name';
+import CardReferenceCompleter from './language-features/complete-name';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -21,7 +21,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('world-build.create', createFromTemplate));
 	context.subscriptions.push(vscode.commands.registerCommand('world-build.create-template', createTemplate));
 	context.subscriptions.push(vscode.commands.registerCommand('world-build.copy-template', copyTemplate));
-	context.subscriptions.push(vscode.languages.registerCompletionItemProvider({ language:'yaml', scheme: 'file'}, new CardReferenceCompleater(),'@'));
+	context.subscriptions.push(vscode.languages.registerCompletionItemProvider({ language:'yaml', scheme: 'file'}, new CardReferenceCompleter(),'@'));
 	setTimeout(() => {
 		console.log(contentCards);
 	}, 1500);

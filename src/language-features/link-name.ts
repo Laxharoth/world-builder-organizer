@@ -11,6 +11,7 @@ export default class CardReferenceLink implements DocumentLinkProvider{
         Array.from(new Set(text.split(/(\s|\t|\n)+/).filter(word=>word.startsWith("@") && word!=="@"))).forEach(word=>{
             let index = 0;
             const link = contentCards[word.substring(1)];
+            if(!link){return;}
             const linkData = Uri.file(link.path);
             while( (index = text.indexOf(word,index)) >= 0){
                 const start = document.positionAt(index);

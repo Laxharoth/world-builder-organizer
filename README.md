@@ -24,5 +24,17 @@ Links between content files can be created by writting '@' and then the name of 
 |**World Builder: Create Template**|Creates a simple template file        |
 |**World Builder: Copy Template**  |Creates a copy of a template file     |
 |**World Builder: Create Card**    |Creates a file in the world directory from a template<br>The variables in the template will be prompted for completion.|
+ 
+## Changelog
+
+### 1.0.1
+
+#### Fix
+
+When a description in the yaml file was an object the quickpick would not display.
+
+### 1.0.0
+
+Initial release
 
 -----------------------------------------------------------------------------------------------------------

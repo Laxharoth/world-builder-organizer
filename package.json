@@ -2,6 +2,7 @@
   "name": "world-build",
   "displayName": "Simple World Build",
   "description": "",
+  "publisher": "Laxharoth",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.64.0"

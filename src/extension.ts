@@ -10,8 +10,6 @@ import CardReferenceLink from './language-features/link-name';
 import HighlightSintaxis from './language-features/highlight-name';
 import Tokenizer from './language-features/tokenizer';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export async function activate(context: vscode.ExtensionContext) {
 	console.log("activate");
 	monitorTemplateChange();
@@ -33,5 +31,4 @@ export async function activate(context: vscode.ExtensionContext) {
 	}, 1500);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}

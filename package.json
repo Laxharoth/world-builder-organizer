@@ -1,6 +1,6 @@
 {
   "name": "world-build",
-  "displayName": "World Build",
+  "displayName": "Simple World Build",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -21,26 +21,30 @@
   "contributes": {
     "commands": [
       {
-        "command": "world-build.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "world-build.init",
+        "category": "World Builder",
         "title": "Init World"
       },
       {
         "command": "world-build.create",
+        "category": "World Builder",
         "title": "Create Card"
       },
       {
         "command": "world-build.create-template",
+        "category": "World Builder",
         "title": "Create Template"
       },
       {
         "command": "world-build.copy-template",
+        "category": "World Builder",
         "title": "Copy Template"
       }
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Laxharoth/world-builder-organizer"
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

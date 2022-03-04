@@ -1,70 +1,28 @@
-# world-build README
+# Simple World Build
 
-This is the README for your extension "world-build". After writing up a brief description, we recommend including the following sections.
+A simple extension to create files from templates and link files through the folder.
+The files are in YAML format.
 
-## Features
+## Templates
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+The templates are yaml files and can be to create files from them.
+When a file is created from a template there will be a prompt to set each variable in the template.
 
-For example if there is an image subfolder under your extension project workspace:
+<img src="https://i.ibb.co/7Rjxshv/Template-Card.png" alt="Template-Card" border="0">
 
-\!\[feature X\]\(images/feature-x.png\)
+## Link files
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Links between content files can be created by writting '@' and then the name of the file. After writting '@' should display an autocomplete with the options.
 
-## Requirements
+<img src="https://i.ibb.co/qp8523r/demo-Using-File-Link.gif" alt="demo-Using-File-Link" border="0">
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Commands
 
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+|***Command***                    |***Description***                     |
+|---------------------------------|--------------------------------------|
+|**World Builder: Init World**    |Creates the directory structure<br><ul><li>Two directories one for templates and one for the world content</li><li>Three files: A simple template, A file in the root directory and a file in the world directory.</li></ul>|
+|**World Builder: Create Template**|Creates a simple template file        |
+|**World Builder: Copy Template**  |Creates a copy of a template file     |
+|**World Builder: Create Card**    |Creates a file in the world directory from a template<br>The variables in the template will be prompted for completion.|
 
 -----------------------------------------------------------------------------------------------------------
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**

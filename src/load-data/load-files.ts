@@ -22,7 +22,7 @@ export class CardFile{
     description:string;
     constructor(public path:string,{name,description}:CardFile){
         this.name = name;
-        this.description = description;
+        this.description = (typeof description === "string") ? description:"";
     }
     get splitPath(){return this.path.split(/\/|\\/);}
     get label(){return this.name;};

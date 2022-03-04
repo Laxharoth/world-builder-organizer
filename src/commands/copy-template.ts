@@ -1,3 +1,4 @@
+import { CreateFileOptions } from './../create-file/create-file';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from "vscode";
@@ -15,9 +16,16 @@ export default async function copyTemplate(){
     catch(error){ vscode.window.showErrorMessage(`${error}`); return; }
     const pathSubdirs = `${filePath}.yml`.split('/');
     let currentPath = 'template';
+    const files:CreateFileOptions[] = [];
     for (let index = 0; index < pathSubdirs.length; index++) {
         const element = pathSubdirs[index];
         currentPath = path.join(currentPath,element);
-        createFile(currentPath,content,(index===pathSubdirs.length-1)?"file":"directory",false);
+        files.push({
+            filename:currentPath,
+            content:content,
+            type:(index===pathSubdirs.length-1)?"file":"directory",
+            parseContentVariable:false
+        });
     }
+    createFile(files);
 }

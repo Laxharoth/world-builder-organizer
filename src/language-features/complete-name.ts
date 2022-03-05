@@ -3,6 +3,7 @@ import {
     CancellationToken,
     CompletionContext, CompletionItem, CompletionItemProvider, CompletionList, Position, ProviderResult, TextDocument
 } from "vscode";
+import { LINK_STARTING_CHARACTER } from "../constant";
 import { existingKeys } from "../load-data/map-content";
 
 export default class CardReferenceCompleter implements CompletionItemProvider<CompletionItem> {
@@ -10,10 +11,10 @@ export default class CardReferenceCompleter implements CompletionItemProvider<Co
         const linePrefix = document.lineAt(position).text.substring(0, position.character);
         const items : CompletionItem[] = [];
         const lastWord = linePrefix.split(' ').slice(-1)[0];
-        if(!lastWord || !lastWord.startsWith("@")){return null;}
+        if(!lastWord || !lastWord.startsWith(LINK_STARTING_CHARACTER)){return null;}
         items.push(
             ...existingKeys()
-                .filter(key=>`@${key}`.startsWith(`${lastWord}`))
+                .filter(key=>`${LINK_STARTING_CHARACTER}${key}`.startsWith(`${lastWord}`))
                 .map(key=> new CompletionItem(key,vscode.CompletionItemKind.Reference))
             );
         return items;

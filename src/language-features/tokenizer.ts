@@ -1,4 +1,5 @@
 import { Range, SemanticTokensLegend, TextDocument } from "vscode";
+import { LINK_STARTING_CHARACTER, TOKEN_SEPARATOR } from "../constant";
 import { contentCards } from "../load-data/map-content";
 
 enum TokenTypesEnum{ 'link'='link', }
@@ -14,7 +15,7 @@ export default class Tokenizer{
         const documentText = document.getText();
         const parsedTokens:ParsedToken[] = [];
         let index = 0;
-        for(const word of documentText.split(/(\s|\t|\n)+/)){
+        for(const word of documentText.split(new RegExp(`(${TOKEN_SEPARATOR.join('|')})+`))){
             index = documentText.indexOf(word,index);
             const range = new Range(document.positionAt(index), document.positionAt(index + word.length));
             const token = this.buildToken(word, range);
@@ -34,6 +35,7 @@ export default class Tokenizer{
         return null;
     }
     private isLink(text:string){
+        if(!text.startsWith(LINK_STARTING_CHARACTER)){return false;}
         const link = contentCards[text.substring(1)];
         return link !== undefined;
     }

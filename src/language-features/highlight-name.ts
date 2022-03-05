@@ -1,4 +1,4 @@
-import { CancellationToken, DocumentSemanticTokensProvider, Event, ProviderResult, Range, SemanticTokens, SemanticTokensBuilder, SemanticTokensLegend, TextDocument } from "vscode";
+import { CancellationToken, DocumentSemanticTokensProvider, Event, ProviderResult, SemanticTokens, SemanticTokensBuilder, TextDocument } from "vscode";
 import Tokenizer, { tokenTypes } from "./tokenizer";
 
 export default class HighlightSintaxis extends Tokenizer implements DocumentSemanticTokensProvider{

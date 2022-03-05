@@ -9,6 +9,7 @@ import CardReferenceCompleter from './language-features/complete-name';
 import CardReferenceLink from './language-features/link-name';
 import HighlightSintaxis from './language-features/highlight-name';
 import Tokenizer from './language-features/tokenizer';
+import { LINK_STARTING_CHARACTER } from './constant';
 
 export async function activate(context: vscode.ExtensionContext) {
 	console.log("activate");
@@ -23,7 +24,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('world-build.create-template', createTemplate));
 	context.subscriptions.push(vscode.commands.registerCommand('world-build.copy-template', copyTemplate));
 	const selector = { language:'yaml', scheme: 'file'};
-	context.subscriptions.push(vscode.languages.registerCompletionItemProvider(selector, new CardReferenceCompleter(),'@'));
+	context.subscriptions.push(vscode.languages.registerCompletionItemProvider(selector, new CardReferenceCompleter(),LINK_STARTING_CHARACTER));
 	context.subscriptions.push(vscode.languages.registerDocumentLinkProvider(selector, new CardReferenceLink()));
 	context.subscriptions.push(vscode.languages.registerDocumentSemanticTokensProvider(selector, new HighlightSintaxis(), Tokenizer.legend));
 	setTimeout(() => {

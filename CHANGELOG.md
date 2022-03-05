@@ -2,8 +2,21 @@
 
 All notable changes to the "world-build" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 1.0.2
 
-## [Unreleased]
+###Changed
+
+- The character to create a link is now '**+**'.
+
+###Fixed
+
+- A link would be created as long as the name of a card was preceded by any one character.
+
+## 1.0.1
+
+###Fixed 
+- When a description in the yaml file was an object the quickpick would not display.
+
+## 1.0.0
 
 - Initial release

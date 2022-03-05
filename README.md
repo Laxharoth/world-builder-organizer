@@ -14,7 +14,7 @@ When a file is created from a template there will be a prompt to set each variab
 
 Links between content files can be created by writting '+' and then the name of the file. After writting '+' should display an autocomplete with the options.
 
-<img src="https://i.ibb.co/qp8523r/demo-Using-File-Link.gif" alt="demo-Using-File-Link" border="0">
+<img src="https://i.ibb.co/HgfstWB/My-Movie.gif" alt="Link-Files" border="0">
 
 ## Commands
 

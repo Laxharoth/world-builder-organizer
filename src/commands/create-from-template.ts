@@ -28,7 +28,7 @@ export default async function createFromTemplate() {
     const contentVariables = extractContentVariables(content);
     for (const variable of contentVariables) {
         if (variable === '@name')
-            variables['@name'] = filePath;
+            variables['@name'] = path.basename(filePath);
         else
             await setVariable(variable);
     }

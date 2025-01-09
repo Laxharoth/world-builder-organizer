@@ -2,6 +2,13 @@
 
 All notable changes to the "world-build" extension will be documented in this file.
 
+## 1.0.5
+
+###Changed
+
+- Added tool to allow use of new variables (called Meta variables) in template files: use '[@variableName = value]'
+- Added possible Meta Variable @relativePath: the base path where the cards for this template will be created with respect to the 'world' directory
+
 ## 1.0.2
 
 ###Changed

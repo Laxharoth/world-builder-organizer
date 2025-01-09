@@ -3,7 +3,7 @@
   "displayName": "Simple World Build",
   "description": "",
   "publisher": "Laxharoth",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "engines": {
     "vscode": "^1.64.0"
   },

@@ -1,4 +1,1 @@
-export default {
-  name:"[name]",
-  description:"[description]"
-};
+export default {name: '[@name]', description: '[description]'};
